@@ -54,9 +54,6 @@ export function LoginForm({
               </Field>
               <Field>
                 <Button type="submit">Login</Button>
-                <Button variant="outline" type="button">
-                  Login with Google
-                </Button>
               </Field>
             </FieldGroup>
           </form>
