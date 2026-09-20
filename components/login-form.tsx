@@ -29,7 +29,7 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form action="/category">
+          <form action="/category" noValidate>
             <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
@@ -37,12 +37,11 @@ export function LoginForm({
                   id="email"
                   type="email"
                   placeholder="m@example.com"
-                  required
                 />
               </Field>
               <Field>
                 <FieldLabel htmlFor="password">Password</FieldLabel>
-                <Input id="password" type="password" required />
+                <Input id="password" type="password" />
               </Field>
               <Field>
                 <Button type="submit">Login</Button>
