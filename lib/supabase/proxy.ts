@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr"
 import { NextResponse, type NextRequest } from "next/server"
 
-const protectedRoutes = ["/category", "/sub-category", "/platform"]
+const protectedRoutes = ["/topics", "/platform"]
 
 function isProtectedRoute(pathname: string) {
   return protectedRoutes.some(
@@ -71,7 +71,7 @@ export async function updateSession(request: NextRequest) {
   if (isAuthenticated && pathname === "/login") {
     return copyAuthState(
       supabaseResponse,
-      NextResponse.redirect(new URL("/category", request.url))
+      NextResponse.redirect(new URL("/topics", request.url))
     )
   }
 
