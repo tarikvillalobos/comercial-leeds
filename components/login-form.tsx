@@ -50,11 +50,24 @@ export function LoginForm({
                 />
               </Field>
               <Field>
-                <FieldLabel htmlFor="password">Password</FieldLabel>
-                <Input id="password" type="password" />
+                <FieldLabel htmlFor="password">Senha</FieldLabel>
+                <Input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                />
               </Field>
+              {state.error ? (
+                <p className="text-sm text-destructive" role="alert">
+                  {state.error}
+                </p>
+              ) : null}
               <Field>
-                <Button type="submit">Login</Button>
+                <Button type="submit" disabled={pending}>
+                  {pending ? "Entrando..." : "Entrar"}
+                </Button>
               </Field>
             </FieldGroup>
           </form>
