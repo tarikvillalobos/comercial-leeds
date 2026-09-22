@@ -38,3 +38,23 @@ export async function getTopic(slug: string) {
     .eq("active", true)
     .maybeSingle()
 
+  if (error) throw new Error(`Erro ao carregar tópico: ${error.message}`)
+  return data as Topic | null
+}
+
+export async function getSubtopics(topicId: string) {
+  const supabase = await createClient()
+  const { data, error } = await supabase
+    .from("subtopics")
+    .select("id, topic_id, name, slug, description")
+    .eq("topic_id", topicId)
+    .eq("active", true)
+    .order("sort_order")
+    .order("name")
+
+  if (error) throw new Error(`Erro ao carregar subtópicos: ${error.message}`)
+  return data as Subtopic[]
+}
+
+export async function getSubtopic(topicId: string, slug: string) {
+  const supabase = await createClient()
