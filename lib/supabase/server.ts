@@ -18,3 +18,10 @@ export async function createClient() {
               cookieStore.set(name, value, options)
             })
           } catch {
+            // Server Components cannot write cookies. The proxy refreshes them.
+          }
+        },
+      },
+    }
+  )
+}
