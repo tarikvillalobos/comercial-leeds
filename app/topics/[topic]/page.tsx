@@ -38,3 +38,13 @@ export default async function TopicPage({ params }: PageProps<"/topics/[topic]">
                 {subtopic.description ? (
                   <span className="mt-2 line-clamp-2 text-sm text-muted-foreground">
                     {subtopic.description}
+                  </span>
+                ) : null}
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
+    </main>
+  )
+}
