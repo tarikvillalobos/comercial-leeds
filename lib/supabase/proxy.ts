@@ -58,3 +58,22 @@ export async function updateSession(request: NextRequest) {
   })
 
   const { data } = await supabase.auth.getClaims()
+  const isAuthenticated = Boolean(data?.claims)
+  const { pathname } = request.nextUrl
+
+  if (!isAuthenticated && isProtectedRoute(pathname)) {
+    return copyAuthState(
+      supabaseResponse,
+      NextResponse.redirect(new URL("/login", request.url))
+    )
+  }
+
+  if (isAuthenticated && pathname === "/login") {
+    return copyAuthState(
+      supabaseResponse,
+      NextResponse.redirect(new URL("/category", request.url))
+    )
+  }
+
+  return supabaseResponse
+}
