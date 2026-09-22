@@ -1,5 +1,9 @@
-import { cn } from "cn"
+"use client"
 
+import { cn } from "cn"
+import { useActionState } from "react"
+
+import { login, type LoginState } from "@/app/login/actions"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -19,24 +23,30 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const initialState: LoginState = { error: null }
+  const [state, formAction, pending] = useActionState(login, initialState)
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
+          <CardTitle>Entre na sua conta</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Use o e-mail e a senha cadastrados no Supabase.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form action="/category" noValidate>
+          <form action={formAction}>
             <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
                   placeholder="m@example.com"
+                  autoComplete="email"
+                  required
                 />
               </Field>
               <Field>
