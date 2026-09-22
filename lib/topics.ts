@@ -18,3 +18,23 @@ export type Subtopic = {
 
 export async function getTopics() {
   const supabase = await createClient()
+  const { data, error } = await supabase
+    .from("topics")
+    .select("id, name, slug, description, icon")
+    .eq("active", true)
+    .order("sort_order")
+    .order("name")
+
+  if (error) throw new Error(`Erro ao carregar tópicos: ${error.message}`)
+  return data as Topic[]
+}
+
+export async function getTopic(slug: string) {
+  const supabase = await createClient()
+  const { data, error } = await supabase
+    .from("topics")
+    .select("id, name, slug, description, icon")
+    .eq("slug", slug)
+    .eq("active", true)
+    .maybeSingle()
+
