@@ -54,7 +54,7 @@ export async function login(
     }
   }
 
-  redirect("/category")
+  redirect("/topics")
 }
 
 export async function logout() {
