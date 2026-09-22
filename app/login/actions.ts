@@ -38,3 +38,23 @@ export async function login(
     const { error } = await supabase.auth.signInWithPassword({
       email: email.trim(),
       password,
+    })
+
+    if (error) {
+      return {
+        error:
+          error.code === "invalid_credentials"
+            ? "E-mail ou senha inválidos."
+            : "Não foi possível entrar. Tente novamente.",
+      }
+    }
+  } catch {
+    return {
+      error: "Não foi possível conectar ao Supabase. Verifique a configuração.",
+    }
+  }
+
+  redirect("/category")
+}
+
+export async function logout() {
