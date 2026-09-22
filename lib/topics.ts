@@ -58,3 +58,14 @@ export async function getSubtopics(topicId: string) {
 
 export async function getSubtopic(topicId: string, slug: string) {
   const supabase = await createClient()
+  const { data, error } = await supabase
+    .from("subtopics")
+    .select("id, topic_id, name, slug, description")
+    .eq("topic_id", topicId)
+    .eq("slug", slug)
+    .eq("active", true)
+    .maybeSingle()
+
+  if (error) throw new Error(`Erro ao carregar subtópico: ${error.message}`)
+  return data as Subtopic | null
+}
