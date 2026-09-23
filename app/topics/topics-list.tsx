@@ -39,7 +39,15 @@ export function TopicsList({ topics }: { topics: Topic[] }) {
           className="h-10 pl-9"
         />
       </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {filteredTopics.length === 0 ? (
+        <div
+          className="rounded-2xl border border-dashed p-8 text-center text-muted-foreground"
+          role="status"
+        >
+          Nenhum tópico encontrado para “{search.trim()}”.
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {filteredTopics.map((topic) => (
         <Link
           key={topic.id}
@@ -54,7 +62,8 @@ export function TopicsList({ topics }: { topics: Topic[] }) {
           ) : null}
         </Link>
       ))}
-      </div>
+        </div>
+      )}
     </>
   )
 }
