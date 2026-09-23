@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { Search } from "lucide-react"
 import Link from "next/link"
 
 import { Input } from "@/components/ui/input"
@@ -24,13 +25,18 @@ export function TopicsList({ topics }: { topics: Topic[] }) {
 
   return (
     <>
-      <div className="mb-6 max-w-md">
+      <div className="relative mb-6 max-w-md">
+        <Search
+          aria-hidden="true"
+          className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
+        />
         <Input
           type="search"
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           placeholder="Buscar tópicos..."
           aria-label="Buscar tópicos"
+          className="h-10 pl-9"
         />
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
