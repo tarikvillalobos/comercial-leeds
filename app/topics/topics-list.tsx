@@ -6,8 +6,21 @@ import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import type { Topic } from "@/lib/topics"
 
+function normalize(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("pt-BR")
+}
+
 export function TopicsList({ topics }: { topics: Topic[] }) {
   const [search, setSearch] = useState("")
+  const term = normalize(search.trim())
+  const filteredTopics = term
+    ? topics.filter((topic) =>
+        normalize(`${topic.name} ${topic.description ?? ""}`).includes(term)
+      )
+    : topics
 
   return (
     <>
@@ -21,7 +34,7 @@ export function TopicsList({ topics }: { topics: Topic[] }) {
         />
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {topics.map((topic) => (
+        {filteredTopics.map((topic) => (
         <Link
           key={topic.id}
           href={`/topics/${topic.slug}`}
