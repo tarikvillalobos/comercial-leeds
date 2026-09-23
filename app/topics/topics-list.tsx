@@ -55,13 +55,13 @@ export function TopicsList({ topics }: { topics: Topic[] }) {
               className="flex min-h-32 flex-col justify-center rounded-2xl border bg-card p-5 shadow-sm transition-colors hover:bg-accent"
             >
               <span className="font-semibold text-card-foreground">{topic.name}</span>
-          {topic.description ? (
-            <span className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-              {topic.description}
-            </span>
-          ) : null}
-        </Link>
-      ))}
+              {topic.description ? (
+                <span className="mt-2 line-clamp-2 text-sm text-muted-foreground">
+                  {topic.description}
+                </span>
+              ) : null}
+            </Link>
+          ))}
         </div>
       )}
     </>
