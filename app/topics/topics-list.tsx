@@ -1,12 +1,26 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 
+import { Input } from "@/components/ui/input"
 import type { Topic } from "@/lib/topics"
 
 export function TopicsList({ topics }: { topics: Topic[] }) {
+  const [search, setSearch] = useState("")
+
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <>
+      <div className="mb-6 max-w-md">
+        <Input
+          type="search"
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+          placeholder="Buscar tópicos..."
+          aria-label="Buscar tópicos"
+        />
+      </div>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {topics.map((topic) => (
         <Link
           key={topic.id}
@@ -21,6 +35,7 @@ export function TopicsList({ topics }: { topics: Topic[] }) {
           ) : null}
         </Link>
       ))}
-    </div>
+      </div>
+    </>
   )
 }
